@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- REACT LIBRARY -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <!-- REACT DOM LIBRARY -->
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- BABEL LIBRARY -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Exercício 5 - Botão Toggle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .botao {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 20px;
+        }
+        .botao:hover {
+            background-color: #0056b3;
+        }
+        .texto-revelado {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            border-left: 4px solid #007bff;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .estado-atual {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            border-left: 4px solid #28a745;
+        }
+        .estado-atual h3 {
+            margin-top: 0;
+            color: #28a745;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="raiz"></div>
+    <script type="text/babel">
+        function ToggleTexto() {
+            // Estado booleano para controlar se o texto deve ser mostrado
+            const [mostrarTexto, setMostrarTexto] = React.useState(false);
+
+            // Função para inverter o valor do estado
+            const alternarTexto = () => {
+                setMostrarTexto(!mostrarTexto);
+            };
+
+            return (
+                <div className="container">
+                    <h1>Exercício 5: Botão "Mostrar/Ocultar Texto"</h1>
+                    
+                    {/* Botão com texto que muda dependendo do estado */}
+                    <button 
+                        className="botao" 
+                        onClick={alternarTexto}
+                    >
+                        {mostrarTexto ? 'Ocultar Texto' : 'Mostrar Texto'}
+                    </button>
+
+                    {/* Renderização Condicional: texto só aparece se mostrarTexto for true */}
+                    {mostrarTexto && (
+                        <div className="texto-revelado">
+                            <h3>🎉 Texto Revelado!</h3>
+                            <p>
+                                Este é um exemplo de renderização condicional em React! 
+                                O texto aparece e desaparece baseado no estado do componente.
+                            </p>
+                            <p>
+                                Conceitos demonstrados:
+                            </p>
+                            <ul style={{textAlign: 'left', display: 'inline-block'}}>
+                                <li>useState para gerenciar estado booleano</li>
+                                <li>Operador ternário para texto do botão</li>
+                                <li>Operador lógico && para renderização condicional</li>
+                                <li>Função para inverter estado (!mostrarTexto)</li>
+                            </ul>
+                        </div>
+                    )}
+
+                    {/* Estado atual para debug */}
+                    <div className="estado-atual">
+                        <h3>Estado Atual:</h3>
+                        <p><strong>mostrarTexto:</strong> {mostrarTexto ? 'true' : 'false'}</p>
+                        <p><strong>Texto do botão:</strong> "{mostrarTexto ? 'Ocultar Texto' : 'Mostrar Texto'}"</p>
+                    </div>
+                </div>
+            );
+        }
+
+        const elementoDoApp = document.getElementById("raiz");
+        const aplicacao = ReactDOM.createRoot(elementoDoApp);
+        aplicacao.render(<ToggleTexto />);
+    </script>
+</body>
+
+</html>
+

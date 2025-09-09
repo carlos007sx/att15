@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- REACT LIBRARY -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <!-- REACT DOM LIBRARY -->
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- BABEL LIBRARY -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Exercício 2 - Formulário de Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        .botao {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        .botao:hover {
+            background-color: #218838;
+        }
+        .estado-atual {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            border-left: 4px solid #007bff;
+        }
+        .estado-atual h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="raiz"></div>
+    <script type="text/babel">
+        function FormularioLogin() {
+            // Estado usando objeto para armazenar usuário e senha
+            const [dadosForm, setDadosForm] = React.useState({
+                usuario: '',
+                senha: ''
+            });
+
+            // Manipulador único para ambos os inputs usando o name
+            const lidarComMudanca = (evento) => {
+                const { name, value } = evento.target;
+                setDadosForm({
+                    ...dadosForm,
+                    [name]: value
+                });
+            };
+
+            const lidarComSubmit = () => {
+                // Por enquanto, apenas garantir que os inputs estão controlados
+                console.log('Dados do formulário:', dadosForm);
+            };
+
+            return (
+                <div className="container">
+                    <h1>Exercício 2: Formulário de Login Básico</h1>
+                    
+                    <form>
+                        <div className="form-group">
+                            <label htmlFor="usuario">Usuário:</label>
+                            <input 
+                                type="text" 
+                                id="usuario"
+                                name="usuario" 
+                                value={dadosForm.usuario} 
+                                onChange={lidarComMudanca}
+                                placeholder="Digite seu usuário"
+                            />
+                        </div>
+                        
+                        <div className="form-group">
+                            <label htmlFor="senha">Senha:</label>
+                            <input 
+                                type="password" 
+                                id="senha"
+                                name="senha" 
+                                value={dadosForm.senha} 
+                                onChange={lidarComMudanca}
+                                placeholder="Digite sua senha"
+                            />
+                        </div>
+                        
+                        <button 
+                            type="button" 
+                            className="botao" 
+                            onClick={lidarComSubmit}
+                        >
+                            Entrar
+                        </button>
+                    </form>
+
+                    {/* Exibindo os valores atuais do estado */}
+                    <div className="estado-atual">
+                        <h3>Estado Atual do Formulário:</h3>
+                        <p><strong>Usuário:</strong> {dadosForm.usuario || '(vazio)'}</p>
+                        <p><strong>Senha:</strong> {dadosForm.senha || '(vazio)'}</p>
+                    </div>
+                </div>
+            );
+        }
+
+        const elementoDoApp = document.getElementById("raiz");
+        const aplicacao = ReactDOM.createRoot(elementoDoApp);
+        aplicacao.render(<FormularioLogin />);
+    </script>
+</body>
+
+</html>
+

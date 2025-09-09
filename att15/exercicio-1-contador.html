@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- REACT LIBRARY -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <!-- REACT DOM LIBRARY -->
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- BABEL LIBRARY -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Exercício 1 - Contador com Limite</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .contador {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            margin: 20px 0;
+        }
+        .botao {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .botao:hover {
+            background-color: #0056b3;
+        }
+        .limite-atingido {
+            color: #dc3545;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="raiz"></div>
+    <script type="text/babel">
+        function ContadorLimite() {
+            const [contagem, setContagem] = React.useState(0);
+
+            const incrementar = () => {
+                setContagem(contagem + 1);
+            };
+
+            return (
+                <div className="container">
+                    <h1>Exercício 1: Contador com Limite</h1>
+                    <div className="contador">{contagem}</div>
+                    
+                    {/* Renderização Condicional: botão só aparece se contagem < 10 */}
+                    {contagem < 10 && (
+                        <button className="botao" onClick={incrementar}>
+                            Incrementar
+                        </button>
+                    )}
+                    
+                    {/* Mensagem quando limite é atingido */}
+                    {contagem >= 10 && (
+                        <div className="limite-atingido">
+                            Limite atingido! Contador chegou ao máximo.
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        const elementoDoApp = document.getElementById("raiz");
+        const aplicacao = ReactDOM.createRoot(elementoDoApp);
+        aplicacao.render(<ContadorLimite />);
+    </script>
+</body>
+
+</html>
+
